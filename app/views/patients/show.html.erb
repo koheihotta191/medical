@@ -1,0 +1,15 @@
+<h1><%= @patient.last_name %> <%= @patient.first_name %> さんの情報</h1>
+
+<ul>
+  <li>姓：<%= @patient.last_name %></li>
+  <li>名：<%= @patient.first_name %></li>
+  <li>生年月日：<%= @patient.birth_date %></li>
+  <li>電話番号：<%= @patient.phone_number %></li>
+  <li>メール：<%= @patient.email %></li>
+  <li>住所：<%= @patient.address %></li>
+  <li>緊急連絡先：<%= @patient.emergency_contact %></li>
+  <li>カルテ番号：<%= @patient.medical_record_number %></li>
+</ul>
+
+<%= link_to '編集', edit_patient_path(@patient) %> |
+<%= link_to '一覧に戻る', patients_path %>

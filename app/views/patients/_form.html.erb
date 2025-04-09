@@ -1,0 +1,56 @@
+<%= form_with(model: patient, local: true) do |form| %>
+  <% if patient.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(patient.errors.count, "エラー") %>が発生しました:</h2>
+      <ul>
+        <% patient.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :last_name, "姓" %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div>
+    <%= form.label :first_name, "名" %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div>
+    <%= form.label :birth_date, "生年月日" %>
+    <%= form.date_field :birth_date %>
+  </div>
+
+  <div>
+    <%= form.label :phone_number, "電話番号" %>
+    <%= form.text_field :phone_number %>
+  </div>
+
+  <div>
+    <%= form.label :email, "メールアドレス" %>
+    <%= form.email_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :address, "住所" %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :emergency_contact, "緊急連絡先" %>
+    <%= form.text_field :emergency_contact %>
+  </div>
+
+  <div>
+    <%= form.label :medical_record_number, "カルテ番号" %>
+    <%= form.text_field :medical_record_number %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
