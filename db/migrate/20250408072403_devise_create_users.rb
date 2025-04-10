@@ -4,9 +4,9 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
   def change
     create_table :users do |t|
       ## Database authenticatable
-      t.string :staff_id,           null: false, default: "" # 職員ID
+      t.integer :staff_id,           null: false, default: "" # 職員ID
       t.string :encrypted_password, null: false, default: ""
-
+      t.integer :role, null: false, default: 0 # 0=一般, 1=管理者
 
       t.timestamps null: false
     end

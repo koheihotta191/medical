@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :authorize_new_user_registration, only: [:new]
+
+  private
+
+  def authorize_new_user_registration
+    authorize! :new, User
+  end
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 

@@ -73,4 +73,4 @@ gem 'faker-japanese'
 gem 'active_hash'
 gem 'pry-rails'
 gem 'gon'
-
+gem 'cancancan'

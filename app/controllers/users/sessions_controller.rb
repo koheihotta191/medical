@@ -1,6 +1,15 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
+  def create
+    super
+  end
+
+  protected
+
+  def after_sign_in_path_for(resource)
+    patients_path # ログイン後は患者一覧へ
+  end
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in

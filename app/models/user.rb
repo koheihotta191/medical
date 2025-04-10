@@ -6,6 +6,15 @@ class User < ApplicationRecord
 
   validates :staff_id, presence: true
   validates :staff_id, uniqueness: true
+  enum role: { general: 0, admin: 1 }
+  
+  def ability
+    @ability ||= Ability.new(self)
+  end
+  
+  def admin_user?
+    self.staff_id == "123456"
+  end
 
   def email_required?
     false

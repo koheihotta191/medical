@@ -1,0 +1,28 @@
+<!-- filepath: \\wsl.localhost\Ubuntu\home\kohei\projects\medical\app\views\users\new.html.erb -->
+<h1>職員登録</h1>
+
+<%= form_with model: @user, url: users_path, local: true do |f| %>
+  <div class="field">
+    <%= f.label :staff_id, "スタッフID" %>
+    <%= f.text_field :staff_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, "パスワード" %>
+    <%= f.password_field :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, "パスワード（確認）" %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div class="field">
+    <%= f.label :role, "役割" %>
+    <%= f.select :role, [["一般", 0], ["管理者", 1]] %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "登録" %>
+  </div>
+<% end %>
