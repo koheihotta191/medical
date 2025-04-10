@@ -1,2 +1,25 @@
-<h1>MedicalRecords#show</h1>
-<p>Find me in app/views/medical_records/show.html.erb</p>
+<!-- filepath: \\wsl.localhost\Ubuntu\home\kohei\projects\medical\app\views\medical_records\show.html.erb -->
+<h1 class="page-title"><%= @patient.last_name %> <%= @patient.first_name %> さんの診療記録</h1>
+
+<div class="record-container">
+  <table class="table table-bordered">
+    <tr>
+      <th>診察日</th>
+      <td><%= @medical_record.date %></td>
+    </tr>
+    <tr>
+      <th>症状</th>
+      <td><%= @medical_record.symptoms %></td>
+    </tr>
+    <tr>
+      <th>医師コメント</th>
+      <td><%= @medical_record.doctor_comment %></td>
+    </tr>
+  </table>
+</div>
+
+<div class="actions">
+  <%= link_to '編集', edit_patient_medical_record_path(@patient, @medical_record), class: 'btn btn-warning' %>
+  <%= link_to '削除', patient_medical_record_path(@patient, @medical_record), method: :delete, data: { confirm: '削除しますか？' }, class: 'btn btn-danger' %>
+  <%= link_to '診療記録一覧に戻る', patient_medical_records_path(@patient), class: 'btn btn-secondary' %>
+</div>

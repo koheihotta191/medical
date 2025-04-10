@@ -21,6 +21,27 @@ class MedicalRecordsController < ApplicationController
     end
   end
 
+  def show
+    @patient = Patient.find(params[:patient_id])
+    @medical_record = @patient.medical_records.find(params[:id])
+  end
+
+  def edit
+    @patient = Patient.find(params[:patient_id])
+    @medical_record = @patient.medical_records.find(params[:id])
+  end
+
+  def update
+    @patient = Patient.find(params[:patient_id])
+    @medical_record = @patient.medical_records.find(params[:id])
+    
+    if @medical_record.update(medical_record_params)
+      redirect_to patient_medical_record_path(@patient, @medical_record), notice: '更新しました。'
+    else
+      render :edit
+    end
+  end
+
   private
 
   def medical_record_params
