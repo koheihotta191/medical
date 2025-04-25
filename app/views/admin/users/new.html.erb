@@ -1,0 +1,27 @@
+<h2>新しいユーザー登録</h2>
+
+<%= form_with model: @user, url: admin_users_path do |f| %>
+  <div>
+    <%= f.label :staff_id %><br>
+    <%= f.text_field :staff_id %>
+  </div>
+
+  <div>
+    <%= f.label :password %><br>
+    <%= f.password_field :password %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation %><br>
+    <%= f.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= f.label :role %><br>
+    <%= f.select :role, User.roles.keys.map { |role| [role.titleize, role] } %>
+  </div>
+
+  <div>
+    <%= f.submit "登録" %>
+  </div>
+<% end %>

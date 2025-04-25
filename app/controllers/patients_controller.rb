@@ -5,6 +5,7 @@ class PatientsController < ApplicationController
   def new
     @patient = Patient.new
   end
+
   def create
     @patient = Patient.new(patient_params)
     if @patient.save
@@ -13,13 +14,16 @@ class PatientsController < ApplicationController
       render :new
     end
   end
+
   def show
     @patient = Patient.find(params[:id])
     @medical_records = @patient.medical_records
   end
+
   def edit
     @patient = Patient.find(params[:id])
   end
+  
   def update
     @patient = Patient.find(params[:id])
     if @patient.update(patient_params)

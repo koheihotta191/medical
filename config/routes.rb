@@ -6,11 +6,14 @@ Rails.application.routes.draw do
   get 'medical_records/edit'
   get 'medical_records/update'
   get 'medical_records/destroy'
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
+  devise_for :users, skip: [:registrations]
   root "patients#index"
-  resources :users, only: [:new, :create]
+
+  # 管理者用の職員登録ページ（/admin/users/new などに変更）
+  namespace :admin do
+    resources :users, only: [:index, :new, :create]
+  end
+  
   resources :patients do
     resources :medical_records, only: [:new, :create, :index, :show, :edit, :update]
   end

@@ -4,14 +4,10 @@ class ApplicationController < ActionController::Base
 
   # ログイン後のリダイレクト先を設定
   def after_sign_in_path_for(resource)
-    Rails.logger.debug "User staff_id: #{resource.staff_id}"
-
-    if resource.staff_id.to_s == "123456"
-      Rails.logger.debug "Redirecting to new_user_path"
-      new_user_path  # 職員新規登録ページ
+    if resource.admin?  # admin role を持っている場合
+      root_path  # 管理者用の職員登録ページにリダイレクト
     else
-      Rails.logger.debug "Redirecting to patients_path"
-      patients_path  # 患者一覧ページ
+      patients_path  # 一般職員の場合は患者一覧ページにリダイレクト
     end
   end
 

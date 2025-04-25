@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :require_no_authentication, only: [:new, :create]
   before_action :authenticate_user!
   before_action :authorize_admin!
 
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
     end
   end
 
+
   private
 
   def user_params
@@ -23,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def authorize_admin!
-    unless current_user.staff_id == "123456"
+    unless current_user.role == 1
       redirect_to root_path, alert: "アクセス権限がありません。"
     end
   end
