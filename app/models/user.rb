@@ -4,9 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  validates :staff_id, presence: true
-  validates :staff_id, uniqueness: true
-  enum role: { general: 0, admin: 1 }
+  validates :login_id, presence: true, uniqueness: true
+  validates :name, :kana_name, :email, presence: true
   
   # 管理者かどうかの判定（roleを使う）
   

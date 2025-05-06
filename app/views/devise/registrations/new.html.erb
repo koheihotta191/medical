@@ -11,10 +11,73 @@
 
         <div class='field'>
           <div class='field-label'>
-            <%= f.label :staff_id, "スタッフID" %>
+            <%= f.label :login_id, "ログインID" %>
           </div>
           <div class='field-input'>
-            <%= f.text_field :staff_id, autofocus: true %>
+            <%= f.text_field :login_id, autofocus: true %>
+          </div>
+        </div>
+
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :name, "氏名" %>
+          </div>
+          <div class='field-input'>
+            <%= f.text_field :name %>
+          </div>
+        </div>
+
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :kana_name, "氏名（カナ）" %>
+          </div>
+          <div class='field-input'>
+            <%= f.text_field :kana_name %>
+          </div>
+        </div>
+
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :email, "メールアドレス" %>
+          </div>
+          <div class='field-input'>
+            <%= f.email_field :email %>
+          </div>
+        </div>
+
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :phone_number, "電話番号" %>
+          </div>
+          <div class='field-input'>
+            <%= f.telephone_field :phone_number %>
+          </div>
+        </div>
+
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :gender, "性別" %>
+          </div>
+          <div class='field-input'>
+            <%= f.select :gender, [["男性", 0], ["女性", 1], ["その他", 2]], prompt: "選択してください" %>
+          </div>
+        </div>
+
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :position, "役職" %>
+          </div>
+          <div class='field-input'>
+            <%= f.text_field :position %>
+          </div>
+        </div>
+
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :department, "部署" %>
+          </div>
+          <div class='field-input'>
+            <%= f.text_field :department %>
           </div>
         </div>
 
