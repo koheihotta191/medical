@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :patients do
     resources :medical_records
     resources :nursing_records
+    resources :care_records
   end
 
   root "patients#index"

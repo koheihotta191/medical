@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_05_06_061717) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_06_092018) do
+  create_table "care_records", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "patient_id", null: false
+    t.bigint "caregiver_id", null: false
+    t.datetime "recorded_at", null: false
+    t.string "meal_intake"
+    t.string "toileting"
+    t.string "mobility"
+    t.string "sleep_condition"
+    t.text "care_action"
+    t.text "incident_report"
+    t.text "note"
+    t.float "body_temperature"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["caregiver_id"], name: "index_care_records_on_caregiver_id"
+    t.index ["patient_id"], name: "index_care_records_on_patient_id"
+  end
+
   create_table "medical_records", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "patient_id", null: false
     t.bigint "doctor_id", null: false
@@ -27,6 +45,23 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_06_061717) do
     t.datetime "updated_at", null: false
     t.index ["doctor_id"], name: "index_medical_records_on_doctor_id"
     t.index ["patient_id"], name: "index_medical_records_on_patient_id"
+  end
+
+  create_table "nursing_records", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "patient_id", null: false
+    t.bigint "nurse_id", null: false
+    t.datetime "recorded_at"
+    t.text "observation"
+    t.text "nursing_action"
+    t.text "nursing_plan"
+    t.text "evaluation"
+    t.text "note"
+    t.text "vital_signs"
+    t.integer "pain_scale"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["nurse_id"], name: "index_nursing_records_on_nurse_id"
+    t.index ["patient_id"], name: "index_nursing_records_on_patient_id"
   end
 
   create_table "patients", charset: "utf8mb3", force: :cascade do |t|
@@ -78,7 +113,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_06_061717) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "care_records", "patients"
+  add_foreign_key "care_records", "users", column: "caregiver_id"
   add_foreign_key "medical_records", "patients"
   add_foreign_key "medical_records", "users", column: "doctor_id"
+  add_foreign_key "nursing_records", "patients"
+  add_foreign_key "nursing_records", "users", column: "nurse_id"
   add_foreign_key "patients", "users", column: "primary_physician_id"
 end

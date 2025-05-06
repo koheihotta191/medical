@@ -1,0 +1,35 @@
+<h1><%= @patient.last_name %> <%= @patient.first_name %> さんの介護記録</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>記録日時</th>
+      <th>食事摂取状況</th>
+      <th>排泄状況</th>
+      <th>移動状況</th>
+      <th>睡眠状況</th>
+      <th>体温</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @care_records.each do |record| %>
+      <tr>
+        <td><%= record.recorded_at %></td>
+        <td><%= record.meal_intake %></td>
+        <td><%= record.toileting %></td>
+        <td><%= record.mobility %></td>
+        <td><%= record.sleep_condition %></td>
+        <td><%= record.body_temperature %></td>
+        <td>
+          <%= link_to "詳細", patient_care_record_path(@patient, record) %> |
+          <%= link_to "編集", edit_patient_care_record_path(@patient, record) %> |
+          <%= link_to "削除", patient_care_record_path(@patient, record), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "新しい介護記録を追加", new_patient_care_record_path(@patient), class: "btn btn-primary" %>
+<%= link_to "患者一覧に戻る", patients_path, class: "btn btn-secondary" %>
