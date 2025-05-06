@@ -74,6 +74,7 @@ gem 'active_hash'
 gem 'pry-rails'
 gem 'gon'
 gem 'cancancan'
+gem 'pundit'
 
 group :production do
   gem 'pg'

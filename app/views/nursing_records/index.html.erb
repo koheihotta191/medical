@@ -1,0 +1,29 @@
+<h1><%= @patient.last_name %> <%= @patient.first_name %> さんの看護記録</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>記録日時</th>
+      <th>観察内容</th>
+      <th>看護ケア</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @nursing_records.each do |record| %>
+      <tr>
+        <td><%= record.recorded_at %></td>
+        <td><%= record.observation %></td>
+        <td><%= record.nursing_action %></td>
+        <td>
+          <%= link_to "詳細", patient_nursing_record_path(@patient, record) %> |
+          <%= link_to "編集", edit_patient_nursing_record_path(@patient, record) %> |
+          <%= link_to "削除", patient_nursing_record_path(@patient, record), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "新しい看護記録を追加", new_patient_nursing_record_path(@patient), class: "btn btn-primary" %>
+<%= link_to "患者一覧に戻る", patients_path, class: "btn btn-secondary" %>

@@ -1,31 +1,36 @@
 class UsersController < ApplicationController
-  skip_before_action :require_no_authentication, only: [:new, :create]
   before_action :authenticate_user!
-  before_action :authorize_admin!
+  before_action :authorize_admin!, only: [:new, :create]
+
+  def index
+    authorize User # 権限チェック
+    @users = User.all
+  end
 
   def new
+    authorize User # 権限チェック
     @user = User.new
   end
 
   def create
+    authorize User # 権限チェック
     @user = User.new(user_params)
     if @user.save
-      redirect_to new_user_path, notice: "職員を登録しました。"
+      redirect_to users_path, notice: "ユーザーを作成しました。"
     else
       flash.now[:alert] = "登録に失敗しました。入力内容を確認してください。"
       render :new
     end
   end
 
-
   private
 
   def user_params
-    params.require(:user).permit(:staff_id, :password, :password_confirmation, :role)
+    params.require(:user).permit(:name, :kana_name, :email, :phone_number, :gender, :position, :department, :role, :active, :login_id)
   end
 
   def authorize_admin!
-    unless current_user.role == 1
+    unless current_user.admin? # roleが0（管理者）の場合のみ許可
       redirect_to root_path, alert: "アクセス権限がありません。"
     end
   end

@@ -10,43 +10,75 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_04_09_141548) do
+ActiveRecord::Schema[7.1].define(version: 2025_05_06_061717) do
   create_table "medical_records", charset: "utf8mb3", force: :cascade do |t|
-    t.date "date"
-    t.text "symptoms"
-    t.text "doctor_comment"
     t.bigint "patient_id", null: false
+    t.bigint "doctor_id", null: false
+    t.datetime "visited_at", null: false
+    t.text "subjective"
+    t.text "objective"
+    t.text "assessment"
+    t.text "plan"
+    t.text "notes"
+    t.string "diagnosis_code"
+    t.date "follow_up_date"
+    t.string "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["doctor_id"], name: "index_medical_records_on_doctor_id"
     t.index ["patient_id"], name: "index_medical_records_on_patient_id"
   end
 
   create_table "patients", charset: "utf8mb3", force: :cascade do |t|
-    t.string "last_name"
-    t.string "first_name"
-    t.date "birth_date"
+    t.string "patient_code", null: false
+    t.string "last_name", null: false
+    t.string "first_name", null: false
+    t.string "last_name_kana", null: false
+    t.string "first_name_kana", null: false
+    t.date "date_of_birth", null: false
+    t.integer "gender", null: false
+    t.string "blood_type"
+    t.string "postal_code"
+    t.string "address"
     t.string "phone_number"
     t.string "email"
-    t.string "address"
-    t.string "emergency_contact"
-    t.string "medical_record_number"
+    t.string "insurance_number"
+    t.string "insurance_type"
+    t.string "emergency_contact_name"
+    t.string "emergency_contact_phone"
+    t.text "memo"
+    t.integer "status", default: 0, null: false
+    t.bigint "primary_physician_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["medical_record_number"], name: "index_patients_on_medical_record_number", unique: true
+    t.index ["patient_code"], name: "index_patients_on_patient_code", unique: true
+    t.index ["primary_physician_id"], name: "index_patients_on_primary_physician_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
-    t.string "staff_id", default: "", null: false
+    t.string "name", null: false
+    t.string "kana_name", null: false
+    t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "phone_number"
+    t.integer "gender"
+    t.string "position"
+    t.string "department"
+    t.integer "role", default: 0, null: false
+    t.boolean "active", default: true, null: false
+    t.string "login_id"
+    t.datetime "last_sign_in_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "role", default: 0, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["login_id"], name: "index_users_on_login_id", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["staff_id"], name: "index_users_on_staff_id", unique: true
   end
 
   add_foreign_key "medical_records", "patients"
+  add_foreign_key "medical_records", "users", column: "doctor_id"
+  add_foreign_key "patients", "users", column: "primary_physician_id"
 end

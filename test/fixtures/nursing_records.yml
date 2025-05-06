@@ -1,0 +1,25 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patient: one
+  nurse: one
+  recorded_at: 2025-05-06 18:02:06
+  observation: MyText
+  nursing_action: MyText
+  nursing_plan: MyText
+  evaluation: MyText
+  note: MyText
+  vital_signs: MyText
+  pain_scale: 1
+
+two:
+  patient: two
+  nurse: two
+  recorded_at: 2025-05-06 18:02:06
+  observation: MyText
+  nursing_action: MyText
+  nursing_plan: MyText
+  evaluation: MyText
+  note: MyText
+  vital_signs: MyText
+  pain_scale: 1
