@@ -52,7 +52,7 @@ class PatientsController < ApplicationController
       :patient_code, :last_name, :first_name, :last_name_kana, :first_name_kana,
       :date_of_birth, :gender, :blood_type, :postal_code, :address, :phone_number,
       :email, :insurance_number, :insurance_type, :emergency_contact_name,
-      :emergency_contact_phone, :memo, :status, :name_id
+      :emergency_contact_phone, :memo, :status, :user_id
     )
   end
 end

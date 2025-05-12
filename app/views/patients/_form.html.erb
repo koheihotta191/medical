@@ -1,56 +1,100 @@
-<%= form_with(model: patient, local: true) do |form| %>
-  <% if patient.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(patient.errors.count, "エラー") %>が発生しました:</h2>
-      <ul>
-        <% patient.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.label :last_name, "姓" %>
-    <%= form.text_field :last_name %>
+<%= form_with model: @patient, local: true do |f| %>
+  <div class="field">
+    <%= f.label :patient_code, "患者コード" %>
+    <%= f.text_field :patient_code %>
   </div>
 
-  <div>
-    <%= form.label :first_name, "名" %>
-    <%= form.text_field :first_name %>
+  <div class="field">
+    <%= f.label :last_name, "姓" %>
+    <%= f.text_field :last_name %>
   </div>
 
-  <div>
-    <%= form.label :birth_date, "生年月日" %>
-    <%= form.date_field :birth_date %>
+  <div class="field">
+    <%= f.label :first_name, "名" %>
+    <%= f.text_field :first_name %>
   </div>
 
-  <div>
-    <%= form.label :phone_number, "電話番号" %>
-    <%= form.text_field :phone_number %>
+  <div class="field">
+    <%= f.label :last_name_kana, "姓（カナ）" %>
+    <%= f.text_field :last_name_kana %>
   </div>
 
-  <div>
-    <%= form.label :email, "メールアドレス" %>
-    <%= form.email_field :email %>
+  <div class="field">
+    <%= f.label :first_name_kana, "名（カナ）" %>
+    <%= f.text_field :first_name_kana %>
   </div>
 
-  <div>
-    <%= form.label :address, "住所" %>
-    <%= form.text_field :address %>
+  <div class="field">
+    <%= f.label :date_of_birth, "生年月日" %>
+    <%= f.date_select :date_of_birth, start_year: 1900, end_year: Date.today.year, use_japanese_names: true %>
   </div>
 
-  <div>
-    <%= form.label :emergency_contact, "緊急連絡先" %>
-    <%= form.text_field :emergency_contact %>
+  <div class="field">
+    <%= f.label :gender, "性別" %>
+    <%= f.select :gender, Patient.genders.keys.map { |g| [g, g] }, prompt: "選択してください" %>
   </div>
 
-  <div>
-    <%= form.label :medical_record_number, "カルテ番号" %>
-    <%= form.text_field :medical_record_number %>
+  <div class="field">
+    <%= f.label :blood_type, "血液型" %>
+    <%= f.text_field :blood_type %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="field">
+    <%= f.label :postal_code, "郵便番号" %>
+    <%= f.text_field :postal_code %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, "住所" %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number, "電話番号" %>
+    <%= f.telephone_field :phone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, "メールアドレス" %>
+    <%= f.email_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :insurance_number, "保険証番号" %>
+    <%= f.text_field :insurance_number %>
+  </div>
+
+  <div class="field">
+    <%= f.label :insurance_type, "保険の種類" %>
+    <%= f.text_field :insurance_type %>
+  </div>
+
+  <div class="field">
+    <%= f.label :emergency_contact_name, "緊急連絡先氏名" %>
+    <%= f.text_field :emergency_contact_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :emergency_contact_phone, "緊急連絡先電話番号" %>
+    <%= f.telephone_field :emergency_contact_phone %>
+  </div>
+
+  <div class="field">
+    <%= f.label :memo, "備考" %>
+    <%= f.text_area :memo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status, "ステータス" %>
+    <%= f.select :status, Patient.statuses.keys.map { |s| [s, s] }, prompt: "選択してください" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id, "担当医" %>
+    <%= f.collection_select :user_id, User.all, :id, :name, prompt: "選択してください" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "登録する", class: "btn btn-primary" %>
   </div>
 <% end %>

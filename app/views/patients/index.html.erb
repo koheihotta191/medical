@@ -1,33 +1,74 @@
-<h1>患者一覧</h1>
+<div class="container">
+  <div class="row">
+    <!-- A列: 患者一覧 -->
+    <div class="col-md-8">
+      <h1>患者一覧</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>患者コード</th>
-      <th>氏名</th>
-      <th>生年月日</th>
-      <th>性別</th>
-      <th>電話番号</th>
-      <th>ステータス</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @patients.each do |patient| %>
-      <tr>
-        <td><%= patient.patient_code %></td>
-        <td><%= link_to "#{patient.last_name} #{patient.first_name}", patient_path(patient) %></td>
-        <td><%= patient.date_of_birth %></td>
-        <td><%= ["男性", "女性", "その他"][patient.gender] %></td>
-        <td><%= patient.phone_number %></td>
-        <td><%= ["外来", "入院中", "退院済み"][patient.status] %></td>
-        <td>
-          <%= link_to "編集", edit_patient_path(patient) %> |
-          <%= link_to "削除", patient_path(patient), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>患者コード</th>
+            <th>氏名</th>
+            <th>生年月日</th>
+            <th>性別</th>
+            <th>ステータス</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @patients.present? %>
+            <% @patients.each do |patient| %>
+              <tr>
+                <td><%= patient.patient_code %></td>
+                <td><%= link_to "#{patient.last_name} #{patient.first_name}", patient_path(patient) %></td>
+                <td><%= patient.date_of_birth %></td>
+                <td><%= patient.gender %></td>
+                <td><%= patient.status %></td>
+                <td>
+                  <%= link_to "詳細", patient_path(patient) %> |
+                  <%= link_to "カルテ", patient_medical_records_path(patient) %> |
+                  <%= link_to "看護記録", patient_nursing_records_path(patient) %> |
+                  <%= link_to "介護記録", patient_care_records_path(patient) %> |
+                  <%# <%= link_to "栄養記録", patient_nutrition_records_path(patient) %> %>
+                </td>
+                <td>
+                  <%= link_to "編集", edit_patient_path(patient) %> |
+                  <%= link_to "削除", patient_path(patient), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+                </td>
+              </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td colspan="7">患者データがありません。</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
 
-<%= link_to "新規患者登録", new_patient_path, class: "btn btn-primary" %>
+      <%= link_to "新規患者登録", new_patient_path, class: "btn btn-primary" %>
+    </div>
+
+    <!-- 1列横列: 職種選択タブ -->
+    <div class="col-md-4">
+      <h2>職種選択</h2>
+      <% if @patients.present? %>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <%= link_to "医師 - 診療記録", patient_medical_records_path(@patients.first), class: "btn btn-link" %>
+          </li>
+          <li class="list-group-item">
+            <%= link_to "看護師 - 看護記録", patient_nursing_records_path(@patients.first), class: "btn btn-link" %>
+          </li>
+          <li class="list-group-item">
+            <%= link_to "介護職 - 介護記録", patient_care_records_path(@patients.first), class: "btn btn-link" %>
+          </li>
+          <li class="list-group-item">
+            <%# <%= link_to "管理栄養士 - 栄養記録", patient_nutrition_records_path(@patients.first), class: "btn btn-link" %> %>
+          </li>
+        </ul>
+      <% else %>
+        <p>患者データがありません。職種選択は利用できません。</p>
+      <% end %>
+    </div>
+  </div>
+</div>

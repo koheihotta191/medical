@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
 
   # Deviseで許可するパラメーターを設定
   def configure_permitted_parameters
+
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:login_id])
     # 新規登録時のパラメータ許可
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :kana_name, :email, :phone_number, :gender, :position, :department, :role, :active, :login_id])
 

@@ -17,9 +17,9 @@ class CreatePatients < ActiveRecord::Migration[7.1]
       t.string :insurance_type                               # 保険の種類
       t.string :emergency_contact_name                       # 緊急連絡先氏名
       t.string :emergency_contact_phone                      # 緊急連絡先電話番号
-      t.text :memo                                            # 特記事項・備考
+      t.text :memo                                           # 特記事項・備考
       t.integer :status, default: 0, null: false             # ステータス
-      t.references :name, foreign_key: { to_table: :users } # 担当医
+      t.references :user, foreign_key: true                  # 担当医
 
       t.timestamps
     end

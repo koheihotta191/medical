@@ -83,11 +83,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_06_092018) do
     t.string "emergency_contact_phone"
     t.text "memo"
     t.integer "status", default: 0, null: false
-    t.bigint "primary_physician_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["patient_code"], name: "index_patients_on_patient_code", unique: true
-    t.index ["primary_physician_id"], name: "index_patients_on_primary_physician_id"
+    t.index ["user_id"], name: "index_patients_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -119,5 +119,5 @@ ActiveRecord::Schema[7.1].define(version: 2025_05_06_092018) do
   add_foreign_key "medical_records", "users", column: "doctor_id"
   add_foreign_key "nursing_records", "patients"
   add_foreign_key "nursing_records", "users", column: "nurse_id"
-  add_foreign_key "patients", "users", column: "primary_physician_id"
+  add_foreign_key "patients", "users"
 end
