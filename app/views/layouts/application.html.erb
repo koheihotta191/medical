@@ -1,16 +1,41 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Medical</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>MedicalApp</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload" %>
+    <style>
+      .header-right {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+    </style>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div class="container d-flex justify-content-between align-items-center py-2">
+        <h1>MedicalApp</h1>
+        <% if user_signed_in? %>
+          <div class="header-right">
+            <span>ログイン中: <%= current_user.name %></span>
+            <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-link", form: { class: "d-inline" } %>
+          </div>
+        <% else %>
+          <div class="header-right">
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-link" %>
+          </div>
+        <% end %>
+      </div>
+    </header>
+
+    <main class="container">
+      <%= yield %>
+    </main>
   </body>
 </html>
