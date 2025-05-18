@@ -27,9 +27,9 @@
                 <td>
                   <%= link_to "詳細", patient_path(patient) %> |
                   <%= link_to "カルテ", patient_medical_records_path(patient) %> |
-                  <%= link_to "看護記録", patient_nursing_records_path(patient) %> |
-                  <%= link_to "介護記録", patient_care_records_path(patient) %> |
-                  <%# <%= link_to "栄養記録", patient_nutrition_records_path(patient) %> %>
+                  <%# <%= link_to "看護記録", patient_nursing_records_path(patient) %> | %>
+                  <%# <%= link_to "介護記録", patient_care_records_path(patient) %> %>
+                  <%# <%= link_to "栄養記録", patient_nutrition_records_path(patient) %>
                 </td>
                 <td>
                   <%= link_to "編集", edit_patient_path(patient) %> |
@@ -56,18 +56,21 @@
           <li class="list-group-item">
             <%= link_to "医師 - 診療記録", patient_medical_records_path(@patients.first), class: "btn btn-link" %>
           </li>
-          <li class="list-group-item">
-            <%= link_to "看護師 - 看護記録", patient_nursing_records_path(@patients.first), class: "btn btn-link" %>
-          </li>
-          <li class="list-group-item">
-            <%= link_to "介護職 - 介護記録", patient_care_records_path(@patients.first), class: "btn btn-link" %>
-          </li>
-          <li class="list-group-item">
-            <%# <%= link_to "管理栄養士 - 栄養記録", patient_nutrition_records_path(@patients.first), class: "btn btn-link" %> %>
-          </li>
+          <%# <li class="list-group-item"> %>
+            <%# <%= link_to "看護師 - 看護記録", patient_nursing_records_path(@patients.first), class: "btn btn-link" %> %>
+          <%# </li> %>
+          <%# <li class="list-group-item"> %>
+            <%# <%= link_to "介護職 - 介護記録", patient_care_records_path(@patients.first), class: "btn btn-link" %> %>
+          <%# </li> %>
+          <%# <li class="list-group-item"> %>
+            <%# <%= link_to "管理栄養士 - 栄養記録", patient_nutrition_records_path(@patients.first), class: "btn btn-link" %>
+          <%# </li> %>
         </ul>
       <% else %>
         <p>患者データがありません。職種選択は利用できません。</p>
+      <% end %>
+      <% if policy(User).new? %>
+        <%= link_to "ユーザー新規登録", new_user_path, class: "btn btn-success mt-3" %>
       <% end %>
     </div>
   </div>
