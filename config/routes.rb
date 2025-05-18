@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users, only: [:new, :create]
   devise_for :users
   
 
@@ -6,7 +7,6 @@ Rails.application.routes.draw do
     resources :medical_records
     resources :nursing_records
     resources :care_records
-    resources :users, only: [:new, :create]
   end
 
   root "patients#index"

@@ -1,37 +1,27 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :authorize_admin!, only: [:new, :create]
-
-  def index
-    authorize User # 権限チェック
-    @users = User.all
-  end
+  before_action :admin_only
 
   def new
-    authorize User # 権限チェック
     @user = User.new
   end
 
   def create
-    authorize User # 権限チェック
     @user = User.new(user_params)
     if @user.save
-      redirect_to users_path, notice: "ユーザーを作成しました。"
+      redirect_to patients_path, notice: "ユーザーを作成しました"
     else
-      flash.now[:alert] = "登録に失敗しました。入力内容を確認してください。"
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   private
 
-  def user_params
-    params.require(:user).permit(:name, :kana_name, :email, :phone_number, :gender, :position, :department, :role, :active, :login_id)
+  def admin_only
+  redirect_to patients_path, alert: "権限がありません" unless current_user&.admin?
   end
 
-  def authorize_admin!
-    unless current_user.admin? # roleが0（管理者）の場合のみ許可
-      redirect_to root_path, alert: "アクセス権限がありません。"
-    end
+  def user_params
+    params.require(:user).permit(:login_id, :name, :kana_name, :email, :phone_number, :gender, :position, :department, :role, :password, :password_confirmation)
   end
 end

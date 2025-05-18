@@ -6,8 +6,17 @@
     </div>
 
     <div class='account-page__inner--right user-form'>
-      <%= form_with model: resource, as: resource_name, url: (resource_name), local: true do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
+      <%= form_with model: @user, url: users_path, local: true do |f| %>
+        <%# エラーメッセージ表示 %>
+        <% if @user.errors.any? %>
+          <div class="alert alert-danger">
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
 
         <div class='field'>
           <div class='field-label'>
@@ -97,6 +106,15 @@
           </div>
           <div class='field-input'>
             <%= f.password_field :password_confirmation, autocomplete: "off" %>
+          </div>
+        </div>
+
+        <div class='field'>
+          <div class='field-label'>
+            <%= f.label :role, "権限" %>
+          </div>
+          <div class='field-input'>
+            <%= f.select :role, User.roles.keys.map { |k| [k.humanize, k] }, prompt: "選択してください" %>
           </div>
         </div>
 

@@ -12,4 +12,14 @@ class User < ApplicationRecord
 
   # バリデーション
   validates :login_id, presence: true, uniqueness: true
+
+  enum role: {
+    admin: 0,          # 管理者
+    doctor: 1,         # 医師
+    nurse: 2,          # 看護師
+    pharmacist: 3,     # 薬剤師
+    dietitian: 4,      # 管理栄養士
+    caregiver: 5,      # 介護士
+    clerk: 6           # 医療事務
+  }
 end
