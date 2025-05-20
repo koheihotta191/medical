@@ -16,9 +16,9 @@
         <td><%= record.subjective %></td>
         <td><%= record.plan %></td>
         <td>
-          <%= link_to "詳細", patient_medical_record_path(@patient, record) %> |
-          <%= link_to "編集", edit_patient_medical_record_path(@patient, record) %> |
-          <%= link_to "削除", patient_medical_record_path(@patient, record), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+          <%= link_to "詳細", patient_medical_record_path(@patient, record) %>
+          <%# <%= link_to "編集", edit_patient_medical_record_path(@patient, record) %>
+          <%# <%= link_to "削除", patient_medical_record_path(@patient, record), method: :delete, data: { confirm: "本当に削除しますか？" } %>
         </td>
       </tr>
     <% end %>

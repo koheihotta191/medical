@@ -3,18 +3,48 @@
 <div class="form-container">
   <%= form_with model: [@patient, @medical_record], local: true do |form| %>
     <div class="form-group">
-      <%= form.label :date, "診察日", class: "form-label" %>
-      <%= form.date_field :date, class: "form-control" %>
+      <%= form.label :visited_at, "診察日時", class: "form-label" %>
+      <%= form.datetime_select :visited_at, class: "form-control" %>
     </div>
 
     <div class="form-group">
-      <%= form.label :symptoms, "症状", class: "form-label" %>
-      <%= form.text_area :symptoms, class: "form-control", rows: 4 %>
+      <%= form.label :subjective, "主訴（S）", class: "form-label" %>
+      <%= form.text_area :subjective, class: "form-control", rows: 2 %>
     </div>
 
     <div class="form-group">
-      <%= form.label :doctor_comment, "医師コメント", class: "form-label" %>
-      <%= form.text_area :doctor_comment, class: "form-control", rows: 4 %>
+      <%= form.label :objective, "他覚所見（O）", class: "form-label" %>
+      <%= form.text_area :objective, class: "form-control", rows: 2 %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :assessment, "評価・診断（A）", class: "form-label" %>
+      <%= form.text_area :assessment, class: "form-control", rows: 2 %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :plan, "診療計画（P）", class: "form-label" %>
+      <%= form.text_area :plan, class: "form-control", rows: 2 %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :notes, "備考・補足", class: "form-label" %>
+      <%= form.text_area :notes, class: "form-control", rows: 2 %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :diagnosis_code, "病名コード", class: "form-label" %>
+      <%= form.text_field :diagnosis_code, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :follow_up_date, "次回予約日", class: "form-label" %>
+      <%= form.date_field :follow_up_date, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :attachment, "添付ファイル名", class: "form-label" %>
+      <%= form.text_field :attachment, class: "form-control" %>
     </div>
 
     <div class="form-actions">

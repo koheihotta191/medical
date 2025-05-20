@@ -53,6 +53,9 @@ class MedicalRecordsController < ApplicationController
   end
 
   def medical_record_params
-    params.require(:medical_record).permit(:visited_at, :subjective, :objective, :assessment, :plan, :notes, :diagnosis_code, :follow_up_date, :attachment)
+  params.require(:medical_record).permit(
+    :visited_at, :subjective, :objective, :assessment, :plan, :notes,
+    :diagnosis_code, :follow_up_date, :attachment, :doctor_id
+  )
   end
 end

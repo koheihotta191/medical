@@ -4,22 +4,46 @@
 <div class="record-container">
   <table class="table table-bordered">
     <tr>
-      <th>診察日</th>
-      <td><%= @medical_record.date %></td>
+      <th>診察日時</th>
+      <td><%= @medical_record.visited_at %></td>
     </tr>
     <tr>
-      <th>症状</th>
-      <td><%= @medical_record.symptoms %></td>
+      <th>主訴（S）</th>
+      <td><%= @medical_record.subjective %></td>
     </tr>
     <tr>
-      <th>医師コメント</th>
-      <td><%= @medical_record.doctor_comment %></td>
+      <th>他覚所見（O）</th>
+      <td><%= @medical_record.objective %></td>
+    </tr>
+    <tr>
+      <th>評価・診断（A）</th>
+      <td><%= @medical_record.assessment %></td>
+    </tr>
+    <tr>
+      <th>診療計画（P）</th>
+      <td><%= @medical_record.plan %></td>
+    </tr>
+    <tr>
+      <th>備考・補足</th>
+      <td><%= @medical_record.notes %></td>
+    </tr>
+    <tr>
+      <th>病名コード</th>
+      <td><%= @medical_record.diagnosis_code %></td>
+    </tr>
+    <tr>
+      <th>次回予約日</th>
+      <td><%= @medical_record.follow_up_date %></td>
+    </tr>
+    <tr>
+      <th>添付ファイル名</th>
+      <td><%= @medical_record.attachment %></td>
     </tr>
   </table>
 </div>
 
 <div class="actions">
-  <%= link_to '編集', edit_patient_medical_record_path(@patient, @medical_record), class: 'btn btn-warning' %>
+  <%# <%= link_to '編集', edit_patient_medical_record_path(@patient, @medical_record), class: 'btn btn-warning' %>
 
   <%= link_to '診療記録一覧に戻る', patient_medical_records_path(@patient), class: 'btn btn-secondary' %>
 </div>

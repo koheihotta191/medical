@@ -3,12 +3,12 @@
 <ul>
   <li>姓：<%= @patient.last_name %></li>
   <li>名：<%= @patient.first_name %></li>
-  <li>生年月日：<%= @patient.birth_date %></li>
+  <li>生年月日：<%= @patient.date_of_birth %></li>
   <li>電話番号：<%= @patient.phone_number %></li>
   <li>メール：<%= @patient.email %></li>
   <li>住所：<%= @patient.address %></li>
-  <li>緊急連絡先：<%= @patient.emergency_contact %></li>
-  <li>カルテ番号：<%= @patient.medical_record_number %></li>
+  <li>緊急連絡先氏名：<%= @patient.emergency_contact_name %></li>
+  <li>緊急連絡先電話番号：<%= @patient.emergency_contact_phone %></li>
 </ul>
 
 <%= link_to '編集', edit_patient_path(@patient) %> |

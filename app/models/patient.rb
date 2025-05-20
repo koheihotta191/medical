@@ -1,6 +1,6 @@
 class Patient < ApplicationRecord
   belongs_to :user, class_name: 'User', optional: true # 担当医（ユーザー）
-
+  has_many :medical_records
   # バリデーション
   validates :patient_code, presence: true, uniqueness: true
   validates :last_name, :first_name, :last_name_kana, :first_name_kana, :date_of_birth, :gender, presence: true
